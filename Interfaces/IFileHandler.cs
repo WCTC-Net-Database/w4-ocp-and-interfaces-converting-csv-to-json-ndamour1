@@ -4,6 +4,6 @@ namespace W4_assignment_template.Interfaces;
 
 public interface IFileHandler
 {
-    List<Character> ReadCharacters(string filePath);
-    void WriteCharacters(string filePath, List<Character> characters);
+    List<Character> ReadCharactersFromFile(string filePath);
+    void WriteCharactersToFile(string filePath, List<Character> characters);
 }
