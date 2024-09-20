@@ -5,7 +5,7 @@ namespace W4_assignment_template.Services;
 
 public class CsvFileHandler : IFileHandler
 {
-    private string csvPath = "input.csv";
+    private string csvPath = "Files/input.csv";
 
     public CsvFileHandler(string filePath)
     {
