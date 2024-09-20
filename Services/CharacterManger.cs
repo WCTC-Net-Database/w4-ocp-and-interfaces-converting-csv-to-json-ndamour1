@@ -8,7 +8,7 @@ public class CharacterManager
 {
     private readonly IInput _input;
     private readonly IOutput _output;
-    private string _filePath = "input.json";
+    private string _filePath = "Files/input.json";
 
     private string[] lines;
 
@@ -67,11 +67,28 @@ public class CharacterManager
     // Method to display characters
     public void DisplayCharacters()
     {
-        if (_filePath.Equals("input.csv"))
+        if (_filePath.Equals("Files/input.csv"))
         {
             CsvFileHandler fileHandler = new CsvFileHandler(_filePath);
             var characters = fileHandler.ReadCharactersFromFile(_filePath);
 
+            if (characters.Count == 0)
+            {
+                _output.WriteLine("No characters found.");
+            }
+            else
+            {
+                foreach (var character in characters)
+                {
+                    Console.WriteLine(character);
+                }
+            }
+        }
+        else if (_filePath.Equals("Files/input.json"))
+        {
+            JsonFileHandler fileHandler = new JsonFileHandler(_filePath);
+            var characters = fileHandler.ReadCharactersFromFile(_filePath);
+            
             if (characters.Count == 0)
             {
                 _output.WriteLine("No characters found.");
@@ -89,14 +106,14 @@ public class CharacterManager
     // Method to find character
     public void FindCharacter()
     {
-        if (_filePath.Equals("input.csv"))
+        if (_filePath.Equals("Files/input.csv"))
         {
             CsvFileHandler findCharacters = new CsvFileHandler(_filePath);
             _output.Write("Enter the character's name: ");
             string name = _input.ReadLine();
             findCharacters.FindCharactersByName(name);
         }
-        else if (_filePath.Equals("input.json"))
+        else if (_filePath.Equals("Files/input.json"))
         {
             JsonFileHandler findCharacters = new JsonFileHandler(_filePath);
             _output.Write("Enter the character's name: ");
@@ -149,7 +166,7 @@ public class CharacterManager
         string[] equipment = _input.ReadLine().Split('|');
 
         // Displays the user's input for the character
-        if (_filePath.Equals("input.csv"))
+        if (_filePath.Equals("Files/input.csv"))
         {
             // CharacterReader call
             CsvFileHandler characterList = new CsvFileHandler(_filePath);
@@ -161,7 +178,7 @@ public class CharacterManager
             newList.WriteCharactersToFile(_filePath, characters);
             _output.WriteLine($"Welcome, {name} the {characterClass}! You are level {level} with {hitPoints} HP and your equipment includes: {string.Join(", ", equipment)}.");
         }
-        else if (_filePath.Equals("input.json"))
+        else if (_filePath.Equals("Files/input.json"))
         {
             // CharacterReader call
             JsonFileHandler characterList = new JsonFileHandler(_filePath);
@@ -180,7 +197,7 @@ public class CharacterManager
     {
         _output.Write("Enter the number indexed to the character you want to level up.\n");
 
-        if (_filePath.Equals("input.csv"))
+        if (_filePath.Equals("Files/input.csv"))
         {
             CsvFileHandler characterList = new CsvFileHandler(_filePath);
             var characters = characterList.ReadCharactersFromFile(_filePath);
@@ -219,7 +236,7 @@ public class CharacterManager
                 }
             }
         }
-        else if (_filePath.Equals("input.json"))
+        else if (_filePath.Equals("Files/input.json"))
         {
             JsonFileHandler characterList = new JsonFileHandler(_filePath);
             var characters = characterList.ReadCharactersFromFile(_filePath);
