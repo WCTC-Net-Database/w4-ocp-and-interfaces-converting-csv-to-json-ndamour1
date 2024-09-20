@@ -5,7 +5,7 @@ namespace W4_assignment_template.Services;
 
 public class JsonFileHandler : IFileHandler
 {
-    private string jsonPath = "input.json";
+    private string jsonPath = "Files/input.json";
 
     public JsonFileHandler(string filePath)
     {
